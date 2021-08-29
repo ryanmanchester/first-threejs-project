@@ -2,6 +2,14 @@
 //1. Initialize the scene and PerspectiveCamera
 //2. Initialize renderer and set the size
 //3. Append the renderer to the browser body
+
+//Textures
+const textureLoader = new THREE.TextureLoader();
+const normalTexture = textureLoader.load('/assets/normal-map-stone.jpeg')
+
+//DAT GUI
+const gui = new dat.GUI();
+
 const scene = new THREE.Scene();
 const camera = new THREE.PerspectiveCamera(
   75,
@@ -9,8 +17,8 @@ const camera = new THREE.PerspectiveCamera(
   0.1,
   1000
 );
-const renderer = new THREE.WebGLRenderer({ antialias: true });
-renderer.setClearColor("#dddab4");
+
+const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
 renderer.setSize(window.innerWidth, window.innerHeight);
 document.body.appendChild(renderer.domElement);
 
@@ -21,22 +29,33 @@ window.addEventListener('resize', () => {
   camera.updateProjectionMatrix();
 })
 
-//Create a floating torus knot
-const geometry = new THREE.TorusGeometry(1, 0.4, 16, 100);
+//Create a floating shape
+const geometry = new THREE.SphereGeometry(1.5, 64, 64);
 const material = new THREE.MeshStandardMaterial({ color: "#78c9ad" });
+material.roughness = 0;
+material.metalness = 1;
+material.normalMap = normalTexture;
+
 const mesh = new THREE.Mesh(geometry, material);
 scene.add(mesh);
-camera.position.z = 5;
+camera.position.x = 0;
+camera.position.y = 0;
+camera.position.z = 3;
 
-const light = new THREE.PointLight(0xFFFFFF, 1);
-light.position.set(10, 0, 25);
-scene.add(light);
+const light = new THREE.PointLight( 0xff0000, 2);
+light.position.set( 1, 1, 1 );
+scene.add( light );
+
+const light2 = new THREE.PointLight( 0xffffff, 1)
+light2.position.set(2, 3, 4);
+scene.add( light2 );
+
 
 //Create an animate loop to render cube to Scene
 const animate = () => {
   requestAnimationFrame(animate);
-  mesh.rotation.x += .02;
-  mesh.rotation.y += 0.02;
+  //mesh.rotation.x += .02;
+  mesh.rotation.y += 0.01;
   renderer.render(scene, camera);
 }
 
