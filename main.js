@@ -10,7 +10,7 @@ const camera = new THREE.PerspectiveCamera(
   1000
 );
 const renderer = new THREE.WebGLRenderer({ antialias: true });
-renderer.setClearColor("#e5e5e5");
+renderer.setClearColor("#dddab4");
 renderer.setSize(window.innerWidth, window.innerHeight);
 document.body.appendChild(renderer.domElement);
 
@@ -22,21 +22,21 @@ window.addEventListener('resize', () => {
 })
 
 //Create a floating torus knot
-const geometry = new THREE.TorusKnotGeometry();
-const material = new THREE.MeshStandardMaterial({ color: "#215873" });
-const torusKnot = new THREE.Mesh(geometry, material);
-scene.add(torusKnot);
+const geometry = new THREE.TorusGeometry(1, 0.4, 16, 100);
+const material = new THREE.MeshStandardMaterial({ color: "#78c9ad" });
+const mesh = new THREE.Mesh(geometry, material);
+scene.add(mesh);
 camera.position.z = 5;
 
-const light = new THREE.PointLight(0xFFFFFF, 1, 500);
+const light = new THREE.PointLight(0xFFFFFF, 1);
 light.position.set(10, 0, 25);
 scene.add(light);
 
 //Create an animate loop to render cube to Scene
 const animate = () => {
   requestAnimationFrame(animate);
-  torusKnot.rotation.x += 0.01;
-  torusKnot.rotation.y += 0.01;
+  mesh.rotation.x += .02;
+  mesh.rotation.y += 0.02;
   renderer.render(scene, camera);
 }
 
