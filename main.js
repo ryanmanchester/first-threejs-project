@@ -42,14 +42,21 @@ camera.position.x = 0;
 camera.position.y = 0;
 camera.position.z = 3;
 
+//Red color point light
 const light = new THREE.PointLight( 0xff0000, 2);
 light.position.set( 1, 1, 1 );
 scene.add( light );
 
+//White color poiont light
 const light2 = new THREE.PointLight( 0xffffff, 1)
 light2.position.set(2, 3, 4);
 scene.add( light2 );
 
+//Add lights to the GUI
+gui.add(light.position, 'y').min(-3).max(3).step(0.01);
+gui.add(light.position, 'x').min(-6).max(6).step(0.01);
+gui.add(light.position, 'z').min(-3).max(3).step(0.01);
+gui.add(light, 'intensity').min(0).max(10).step(0.01);
 
 //Create an animate loop to render cube to Scene
 const animate = () => {
