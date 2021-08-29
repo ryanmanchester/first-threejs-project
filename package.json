@@ -1,0 +1,22 @@
+{
+  "name": "first-three-project",
+  "version": "1.0.0",
+  "description": "",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ryanmanchester/first-threejs-project.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ryanmanchester/first-threejs-project/issues"
+  },
+  "homepage": "https://github.com/ryanmanchester/first-threejs-project#readme",
+  "dependencies": {
+    "three": "^0.132.2"
+  }
+}
