@@ -14,17 +14,30 @@ renderer.setClearColor("#e5e5e5");
 renderer.setSize(window.innerWidth, window.innerHeight);
 document.body.appendChild(renderer.domElement);
 
-//Create a floating cube
-const geometry = new THREE.BoxGeometry();
-const material = new THREE.MeshBasicMaterial({ color: 0x00ff00});
-const cube = new THREE.Mesh(geometry, material);
-scene.add(cube);
+//Make responsive
+window.addEventListener('resize', () => {
+  renderer.setSize(window.innerWidth, window.innerHeight);
+  camera.aspect = window.innerWidth / window.innerHeight;
+  camera.updateProjectionMatrix();
+})
+
+//Create a floating torus knot
+const geometry = new THREE.TorusKnotGeometry();
+const material = new THREE.MeshStandardMaterial({ color: "#215873" });
+const torusKnot = new THREE.Mesh(geometry, material);
+scene.add(torusKnot);
 camera.position.z = 5;
+
+const light = new THREE.PointLight(0xFFFFFF, 1, 500);
+light.position.set(10, 0, 25);
+scene.add(light);
 
 //Create an animate loop to render cube to Scene
 const animate = () => {
-  requestAnimationFrame( animate );
-  renderer.render( scene, camera);
+  requestAnimationFrame(animate);
+  torusKnot.rotation.x += 0.01;
+  torusKnot.rotation.y += 0.01;
+  renderer.render(scene, camera);
 }
 
 animate();
